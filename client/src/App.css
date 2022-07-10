@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #343434;
+  --primary-color: #005fff;
+  /* --primary-color: #343434; */
   --primary-color-alpha: #005fff1a;
 }
 
@@ -357,7 +358,7 @@ body {
 
 .str-chat__list--thread .str-chat__message-simple__actions__action--options .str-chat__message-actions-box {
   left: initial;
-  right: 100%;
+  /* right: calc(100%-8px); */
   border-radius: var(--border-radius-md);
 }
 
@@ -428,7 +429,9 @@ body {
 
 .channel-list__header {
   padding-left: 16px;
-  height: 70px;
+  height: 86px;
+  box-shadow: 0px 2px 9px 0 rgba(0, 0, 0, 0.1),
+    0 1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .channel-list__header__text {
@@ -841,8 +844,10 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background: #5d5d5d;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  /* background: #5d5d5d; */
+  border-top-right-radius: 16px;
+  box-shadow: 0px 2px 9px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 
@@ -1583,7 +1588,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 .str-chat__thread-list {
   top: 62px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: auto;
+  /* height: auto; */
 }
 
 .str-chat__thread-list .str-chat__message-team {
@@ -1696,11 +1701,11 @@ div.rta__autocomplete.str-chat__emojisearch {
   outline: none;
 }
 
-.team-channerl-header_menu-icon {
+.team-channel-header_menu-icon {
   display: none;
 }
 
-.channerl-list__container-toggle {
+.channel-list__container-toggle {
   display: none;
   height: 50px;
   width: 50px;
@@ -1733,7 +1738,7 @@ div.rta__autocomplete.str-chat__emojisearch {
     display: none;
   }
 
-  .team-channerl-header_menu-icon {
+  .team-channel-header_menu-icon {
     display: flex;
   }
 
@@ -1795,7 +1800,16 @@ div.rta__autocomplete.str-chat__emojisearch {
   }
 }
 
-.str-chat-channel .str-chat__container {
+.str-chat.messaging {
+  background: var(--primary-color);
+}
+
+/* .str-chat__list--thread .str-chat__message--me .str-chat__message-inner>.str-chat__message-simple__actions,
+.str-chat__message-simple--me .str-chat__message-inner>.str-chat__message-simple__actions {
+  right: calc(100% - 28px);
+} */
+
+/* .str-chat-channel .str-chat__container {
   background: cadetblue;
 }
 
@@ -1808,7 +1822,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 
 .str-chat__thread-list {
   height: 100%;
-}
+} */
 
 @media screen and (max-width: 650px) {
   .channerl-list__container-toggle {
