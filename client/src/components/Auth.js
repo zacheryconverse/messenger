@@ -4,6 +4,8 @@ import axios from "axios";
 
 import signinImage from "../assets/signup.jpg";
 
+const cookies = new Cookies();
+
 const initialState = {
   fullName: "",
   username: "",
@@ -21,10 +23,35 @@ const Auth = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
+    const { fullName, username, password, phoneNumber, avatarURL } = form;
+
+    const URL = "http://localhost:8000/auth";
+
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+      username,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL,
+    });
+
+    cookies.set("token", token);
+    cookies.set("username", username);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if (isSignup) {
+      cookies.set("hashedPassword", hashedPassword);
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+    }
+
+    window.location.reload();
   };
 
   const switchMode = () => {
@@ -41,6 +68,7 @@ const Auth = () => {
               <div className="auth__form-container_fields-content_input">
                 <label htmlFor="fullName">Full Name</label>
                 <input
+                  autoFocus
                   name="fullName"
                   type="text"
                   placeholder="Full Name"
@@ -98,7 +126,7 @@ const Auth = () => {
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   name="confirmPassword"
-                  type="text"
+                  type="password"
                   placeholder="Confirm Password"
                   onChange={handleChange}
                   required
