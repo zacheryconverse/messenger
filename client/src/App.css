@@ -432,6 +432,8 @@ body {
   height: 86px;
   box-shadow: 0px 2px 9px 0 rgba(0, 0, 0, 0.1),
     0 1px 0 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 
 .channel-list__header__text {
@@ -1803,26 +1805,6 @@ div.rta__autocomplete.str-chat__emojisearch {
 .str-chat.messaging {
   background: var(--primary-color);
 }
-
-/* .str-chat__list--thread .str-chat__message--me .str-chat__message-inner>.str-chat__message-simple__actions,
-.str-chat__message-simple--me .str-chat__message-inner>.str-chat__message-simple__actions {
-  right: calc(100% - 28px);
-} */
-
-/* .str-chat-channel .str-chat__container {
-  background: cadetblue;
-}
-
-.dark.str-chat .str-chat__input-flat textarea {
-  background: #464748;
-}
-.str-chat__message-simple {
-  padding-right: 1rem;
-}
-
-.str-chat__thread-list {
-  height: 100%;
-} */
 
 @media screen and (max-width: 650px) {
   .channerl-list__container-toggle {
