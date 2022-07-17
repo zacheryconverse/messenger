@@ -78,7 +78,7 @@ const ChannelSearch = ({ setToggleContainer }) => {
           teamChannels={teamChannels}
           directChannels={directChannels}
           loading={loading}
-          setChannel={setActiveChannel}
+          setChannel={setChannel}
           setQuery={setQuery}
           setToggleContainer={setToggleContainer}
         />

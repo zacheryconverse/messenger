@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 
 import { ChannelContainer, ChannelListContainer, Auth } from "./components";
 
-import 'stream-chat-react/dist/css/index.css';
+import "@stream-io/stream-chat-css/dist/css/index.css";
 import "./App.css";
 
 const cookies = new Cookies();
@@ -27,6 +27,14 @@ if (authToken) {
     },
     authToken
   );
+
+  const welcomeChannel = client.channel("team", "Welcome");
+  const forecastChannel = client.channel("team", "Forecast");
+  const clubMeetingsChannel = client.channel("team", "Club-Meetings");
+
+  welcomeChannel.addMembers([client.userID]);
+  forecastChannel.addMembers([client.userID]);
+  clubMeetingsChannel.addMembers([client.userID]);
 }
 
 const App = () => {

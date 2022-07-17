@@ -28,7 +28,7 @@ const Auth = () => {
 
     const { username, password, phoneNumber, avatarURL } = form;
 
-    const URL = "http://localhost:8000/auth";
+    const URL = "https://pilots-lounge.herokuapp.com/auth";
 
     const {
       data: { token, userId, hashedPassword, fullName },
@@ -89,13 +89,12 @@ const Auth = () => {
             </div>
             {isSignup ? (
               <div className="auth__form-container_fields-content_input">
-                <label htmlFor="phonNumber">Phone Number</label>
+                <label htmlFor="phoneNumber">Phone Number</label>
                 <input
-                  name="phonNumber"
+                  name="phoneNumber"
                   type="text"
-                  placeholder="Phone Number"
+                  placeholder="Phone Number - Optional"
                   onChange={handleChange}
-                  required
                 ></input>
               </div>
             ) : null}
@@ -105,9 +104,8 @@ const Auth = () => {
                 <input
                   name="avatarURL"
                   type="text"
-                  placeholder="Avatar URL"
+                  placeholder="Avatar URL - Optional"
                   onChange={handleChange}
-                  required
                 ></input>
               </div>
             ) : null}
@@ -139,7 +137,7 @@ const Auth = () => {
           </form>
           <div className="auth__form-container_fields-account">
             <p>
-              {isSignup ? "Already have an account?" : 'Don"t have an account?'}
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
               <span onClick={switchMode}>
                 {isSignup ? " Sign In" : " Sign Up"}
               </span>

@@ -31,7 +31,9 @@ app.post("/", (req, res) => {
         if (!user.online) {
           twilioClient.messages
             .create({
-              body: `You have a new message from ${message.user.fullName} - ${message.text}`,
+              body: `You have a new message from ${message.user.fullName} ${
+                message.text ? "-" + message.text : ""
+              }`,
               messagingServiceSid: messagingServiceSid,
               to: user.phoneNumber,
             })

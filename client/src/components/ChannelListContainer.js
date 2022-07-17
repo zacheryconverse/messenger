@@ -2,26 +2,35 @@ import React, { useState } from "react";
 import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
-import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
+import { ChannelSearch, TeamChannelList } from "./";
 import ParachuteIcon from "../assets/parachute.png";
 import LogoutIcon from "../assets/logout.png";
 
 const cookies = new Cookies();
 
-const SideBar = ({ logout }) => (
-  <div className="channel-list__sidebar">
-    <div className="channel-list__sidebar__icon1">
-      <div className="icon1__inner">
-        <img src={ParachuteIcon} alt="parachute" width="30" />
+const SideBar = ({ logout }) => {
+  const { client, setActiveChannel } = useChatContext();
+
+  const welcomeChannel = client.channel("team", "Welcome");
+
+  return (
+    <div className="channel-list__sidebar">
+      <div
+        className="channel-list__sidebar__icon1"
+        onClick={() => setActiveChannel(welcomeChannel)}
+      >
+        <div className="icon1__inner">
+          <img src={ParachuteIcon} alt="parachute" width="30" />
+        </div>
+      </div>
+      <div className="channel-list__sidebar__icon2">
+        <div className="icon2__inner" onClick={logout}>
+          <img src={LogoutIcon} alt="Logout" width="30" />
+        </div>
       </div>
     </div>
-    <div className="channel-list__sidebar__icon2">
-      <div className="icon2__inner" onClick={logout}>
-        <img src={LogoutIcon} alt="Logout" width="30" />
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 const CompanyHeader = () => (
   <div className="channel-list__header">
@@ -46,7 +55,7 @@ const ChannelListContent = ({
 }) => {
   const { client } = useChatContext();
 
-  const logout = () => {
+  const logout = async () => {
     cookies.remove("token");
     cookies.remove("userId");
     cookies.remove("username");
@@ -55,6 +64,7 @@ const ChannelListContent = ({
     cookies.remove("hashedPassword");
     cookies.remove("phoneNumber");
 
+    await client.disconnectUser();
     window.location.reload();
   };
 
@@ -80,16 +90,6 @@ const ChannelListContent = ({
               setToggleContainer={setToggleContainer}
             />
           )}
-          Preview={(previewProps) => (
-            <TeamChannelPreview
-              {...previewProps}
-              setCreateType={setCreateType}
-              setIsCreating={setIsCreating}
-              setIsEditing={setIsEditing}
-              setToggleContainer={setToggleContainer}
-              type="team"
-            />
-          )}
         />
         <ChannelList
           filters={filters}
@@ -103,15 +103,6 @@ const ChannelListContent = ({
               setCreateType={setCreateType}
               setIsEditing={setIsEditing}
               setToggleContainer={setToggleContainer}
-            />
-          )}
-          Preview={(previewProps) => (
-            <TeamChannelPreview
-              {...previewProps}
-              setIsCreating={setIsCreating}
-              setIsEditing={setIsEditing}
-              setToggleContainer={setToggleContainer}
-              type="messaging"
             />
           )}
         />
